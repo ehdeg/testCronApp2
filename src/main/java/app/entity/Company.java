@@ -4,14 +4,13 @@ import java.io.*;
 import javax.persistence.*;
 import java.util.*;
 import javax.xml.bind.annotation.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * Classe que representa a tabela COMPANY
+ * Classe que representa a tabela TST_COMPANY
  * @generated
  */
 @Entity
-@Table(name = "\"COMPANY\"")
+@Table(name = "\"TST_COMPANY\"")
 @XmlRootElement
 public class Company implements Serializable {
 
@@ -25,6 +24,7 @@ public class Company implements Serializable {
    * @generated
    */
   @Id
+  @Column(name = "id", nullable = false, insertable=true, updatable=true)
   private java.lang.String id = UUID.randomUUID().toString().toUpperCase();
   
   /**
@@ -40,9 +40,9 @@ public class Company implements Serializable {
   public Company(){
   }
 
+  
   /**
    * Obtém id
-   * 
    * return id
    * @generated
    */
@@ -59,9 +59,9 @@ public class Company implements Serializable {
     this.id = id;
     return this;
   }
+  
   /**
    * Obtém name
-   * 
    * return name
    * @generated
    */

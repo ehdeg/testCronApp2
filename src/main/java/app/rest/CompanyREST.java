@@ -28,19 +28,21 @@ public class CompanyREST {
   @Autowired
   @Qualifier("CompanyBusiness")
   private CompanyBusiness companyBusiness;
-  
+
   /**
    * @generated
    */
   @Autowired
   @Qualifier("UserBusiness")
   private UserBusiness userBusiness;
+
   /**
    * @generated
    */
   @Autowired
   @Qualifier("DepartmentBusiness")
   private DepartmentBusiness departmentBusiness;
+
   /**
    * Serviço exposto para novo registro de acordo com a entidade fornecida
    * 
@@ -62,6 +64,16 @@ public class CompanyREST {
   }
 
   /**
+   * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+   * 
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.PUT, value = "/{companyId}")
+  public Company put(@Validated @RequestBody final Company entity, @PathVariable("companyId") java.lang.String companyId) throws Exception {
+    return companyBusiness.put(entity);
+  }  
+
+  /**
    * Serviço exposto para remover a entidade de acordo com o id fornecido
    * 
    * @generated
@@ -75,19 +87,16 @@ public class CompanyREST {
    * NamedQuery list
    * @generated
    */
-  @RequestMapping(method = RequestMethod.GET
-  )    
-  public HttpEntity<PagedResources<Company>> listParams (Pageable pageable, PagedResourcesAssembler assembler){
+  @RequestMapping(method = RequestMethod.GET)
+  public HttpEntity<PagedResources<Company>> listParams(Pageable pageable, PagedResourcesAssembler assembler){
     return new ResponseEntity<>(assembler.toResource(companyBusiness.list(pageable)), HttpStatus.OK);    
   }
-
 
   /**
    * OneToMany Relationship GET
    * @generated
    */
-  @RequestMapping(method = RequestMethod.GET
-  , value="/{companyId}/User")    
+  @RequestMapping(method = RequestMethod.GET, value="/{companyId}/User")    
   public HttpEntity<PagedResources<User>> findUser(@PathVariable("companyId") java.lang.String companyId, Pageable pageable, PagedResourcesAssembler assembler) {
     return new ResponseEntity<>(assembler.toResource(companyBusiness.findUser(companyId, pageable)), HttpStatus.OK);
   }
@@ -96,8 +105,7 @@ public class CompanyREST {
    * OneToMany Relationship DELETE 
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.DELETE
-  , value="/{companyId}/User/{userId}")    
+  @RequestMapping(method = RequestMethod.DELETE, value="/{companyId}/User/{userId}")    
   public void deleteUser(@PathVariable("userId") java.lang.String userId) throws Exception {
     this.userBusiness.delete(userId);
   }
@@ -106,9 +114,8 @@ public class CompanyREST {
    * OneToMany Relationship PUT
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.PUT
-  , value="/{companyId}/User/{userId}")
-  public User putUser(@Validated @RequestBody final User entity, @PathVariable("userId") java.lang.String userId) throws Exception {
+  @RequestMapping(method = RequestMethod.PUT, value="/{companyId}/User")
+  public User putUser(@Validated @RequestBody final User entity, @PathVariable("companyId") java.lang.String companyId) throws Exception {
     return this.userBusiness.put(entity);
   }  
   
@@ -116,21 +123,18 @@ public class CompanyREST {
    * OneToMany Relationship POST
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.POST
-  , value="/{companyId}/User")
+  @RequestMapping(method = RequestMethod.POST, value="/{companyId}/User")
   public User postUser(@Validated @RequestBody final User entity, @PathVariable("companyId") java.lang.String companyId) throws Exception {
-  Company company = this.companyBusiness.get(companyId);
-  entity.setCompany(company);
+    Company company = this.companyBusiness.get(companyId);
+    entity.setCompany(company);
     return this.userBusiness.post(entity);
-  }   
-
+  }
 
   /**
    * OneToMany Relationship GET
    * @generated
    */
-  @RequestMapping(method = RequestMethod.GET
-  , value="/{companyId}/Department")    
+  @RequestMapping(method = RequestMethod.GET, value="/{companyId}/Department")    
   public HttpEntity<PagedResources<Department>> findDepartment(@PathVariable("companyId") java.lang.String companyId, Pageable pageable, PagedResourcesAssembler assembler) {
     return new ResponseEntity<>(assembler.toResource(companyBusiness.findDepartment(companyId, pageable)), HttpStatus.OK);
   }
@@ -139,8 +143,7 @@ public class CompanyREST {
    * OneToMany Relationship DELETE 
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.DELETE
-  , value="/{companyId}/Department/{departmentId}")    
+  @RequestMapping(method = RequestMethod.DELETE, value="/{companyId}/Department/{departmentId}")    
   public void deleteDepartment(@PathVariable("departmentId") java.lang.String departmentId) throws Exception {
     this.departmentBusiness.delete(departmentId);
   }
@@ -149,9 +152,8 @@ public class CompanyREST {
    * OneToMany Relationship PUT
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.PUT
-  , value="/{companyId}/Department/{departmentId}")
-  public Department putDepartment(@Validated @RequestBody final Department entity, @PathVariable("departmentId") java.lang.String departmentId) throws Exception {
+  @RequestMapping(method = RequestMethod.PUT, value="/{companyId}/Department")
+  public Department putDepartment(@Validated @RequestBody final Department entity, @PathVariable("companyId") java.lang.String companyId) throws Exception {
     return this.departmentBusiness.put(entity);
   }  
   
@@ -159,15 +161,12 @@ public class CompanyREST {
    * OneToMany Relationship POST
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.POST
-  , value="/{companyId}/Department")
+  @RequestMapping(method = RequestMethod.POST, value="/{companyId}/Department")
   public Department postDepartment(@Validated @RequestBody final Department entity, @PathVariable("companyId") java.lang.String companyId) throws Exception {
-  Company company = this.companyBusiness.get(companyId);
-  entity.setCompany(company);
+    Company company = this.companyBusiness.get(companyId);
+    entity.setCompany(company);
     return this.departmentBusiness.post(entity);
-  }   
-
-
+  }
 
   /**
    * Serviço exposto para recuperar a entidade de acordo com o id fornecido

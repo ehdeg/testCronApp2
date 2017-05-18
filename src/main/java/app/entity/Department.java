@@ -4,15 +4,14 @@ import java.io.*;
 import javax.persistence.*;
 import java.util.*;
 import javax.xml.bind.annotation.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.eclipse.persistence.annotations.*;
 /**
- * Classe que representa a tabela DEPARTMENT
+ * Classe que representa a tabela TST_DEPARTMENT
  * @generated
  */
 @Entity
-@Table(name = "\"DEPARTMENT\"")
+@Table(name = "\"TST_DEPARTMENT\"")
 @XmlRootElement
 @Multitenant(MultitenantType.SINGLE_TABLE)
 @TenantDiscriminatorColumn(name = "fk_company", contextProperty = "tenant")
@@ -28,6 +27,7 @@ public class Department implements Serializable {
    * @generated
    */
   @Id
+  @Column(name = "id", nullable = false, insertable=true, updatable=true)
   private java.lang.String id = UUID.randomUUID().toString().toUpperCase();
   
   /**
@@ -40,7 +40,7 @@ public class Department implements Serializable {
   * @generated
   */
   @ManyToOne
-  @JoinColumn(name="fk_company", referencedColumnName = "id", insertable=false, updatable=false)
+  @JoinColumn(name="fk_company", nullable = true, referencedColumnName = "id", insertable=false, updatable=false)
   private Company company;
   
   /**
@@ -50,9 +50,9 @@ public class Department implements Serializable {
   public Department(){
   }
 
+  
   /**
    * Obtém id
-   * 
    * return id
    * @generated
    */
@@ -69,9 +69,9 @@ public class Department implements Serializable {
     this.id = id;
     return this;
   }
+  
   /**
    * Obtém name
-   * 
    * return name
    * @generated
    */
@@ -88,9 +88,9 @@ public class Department implements Serializable {
     this.name = name;
     return this;
   }
+  
   /**
    * Obtém company
-   * 
    * return company
    * @generated
    */

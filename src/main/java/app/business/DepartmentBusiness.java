@@ -1,7 +1,5 @@
 package app.business;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -19,7 +17,6 @@ import app.entity.*;
 @Service("DepartmentBusiness")
 public class DepartmentBusiness {
 
-  private static final Logger log = LoggerFactory.getLogger(DepartmentBusiness.class);
 
 
   /**
@@ -41,8 +38,7 @@ public class DepartmentBusiness {
   public Department post(final Department entity) throws Exception {
     // begin-user-code  
     // end-user-code  
-    Department result = null;
-    result = repository.save(entity);
+    Department result = repository.save(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -56,8 +52,7 @@ public class DepartmentBusiness {
   public Department put(final Department entity) throws Exception {
     // begin-user-code  
     // end-user-code
-    Department result = null;
-    result = repository.saveAndFlush(entity);
+    Department result = repository.saveAndFlush(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -69,9 +64,9 @@ public class DepartmentBusiness {
    * @generated
    */
   public void delete(java.lang.String id) throws Exception {
+    Department entity = this.get(id);
     // begin-user-code  
     // end-user-code
-    Department entity = this.get(id);
     this.repository.delete(entity);
     // begin-user-code  
     // end-user-code        
@@ -106,4 +101,17 @@ public class DepartmentBusiness {
     // end-user-code
     return result;
   }
+  /**
+   * Foreign Key company
+   * @generated
+   */
+  public Page<Department> findDepartmentsByCompany(java.lang.String instanceId, Pageable pageable) {
+    // begin-user-code
+    // end-user-code  
+    Page<Department> result = repository.findDepartmentsByCompany(instanceId, pageable);
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+  
 }

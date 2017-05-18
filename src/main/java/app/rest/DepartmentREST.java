@@ -28,7 +28,7 @@ public class DepartmentREST {
   @Autowired
   @Qualifier("DepartmentBusiness")
   private DepartmentBusiness departmentBusiness;
-  
+
   /**
    * Serviço exposto para novo registro de acordo com a entidade fornecida
    * 
@@ -50,6 +50,16 @@ public class DepartmentREST {
   }
 
   /**
+   * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+   * 
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.PUT, value = "/{departmentId}")
+  public Department put(@Validated @RequestBody final Department entity, @PathVariable("departmentId") java.lang.String departmentId) throws Exception {
+    return departmentBusiness.put(entity);
+  }  
+
+  /**
    * Serviço exposto para remover a entidade de acordo com o id fornecido
    * 
    * @generated
@@ -63,13 +73,10 @@ public class DepartmentREST {
    * NamedQuery list
    * @generated
    */
-  @RequestMapping(method = RequestMethod.GET
-  )    
-  public HttpEntity<PagedResources<Department>> listParams (Pageable pageable, PagedResourcesAssembler assembler){
+  @RequestMapping(method = RequestMethod.GET)
+  public HttpEntity<PagedResources<Department>> listParams(Pageable pageable, PagedResourcesAssembler assembler){
     return new ResponseEntity<>(assembler.toResource(departmentBusiness.list(pageable)), HttpStatus.OK);    
   }
-
-
 
   /**
    * Serviço exposto para recuperar a entidade de acordo com o id fornecido
@@ -79,5 +86,14 @@ public class DepartmentREST {
   @RequestMapping(method = RequestMethod.GET, value = "/{departmentId}")
   public Department get(@PathVariable("departmentId") java.lang.String departmentId) throws Exception {
     return departmentBusiness.get(departmentId);
+  }
+
+  /**
+   * Foreign Key company
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET, value="/Company/{companyId}")    
+  public HttpEntity<PagedResources<Department>> findDepartmentsByCompany(@PathVariable("companyId") java.lang.String companyId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(departmentBusiness.findDepartmentsByCompany(companyId, pageable)), HttpStatus.OK);
   }
 }

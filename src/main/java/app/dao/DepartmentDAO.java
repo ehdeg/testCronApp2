@@ -53,4 +53,11 @@ public interface DepartmentDAO extends JpaRepository<Department, java.lang.Strin
   
 
 
+  /**
+   * Foreign Key company
+   * @generated
+   */
+  @Query("SELECT entity FROM Department entity WHERE entity.company.id = :id")
+  public Page<Department> findDepartmentsByCompany(@Param(value="id") java.lang.String id, Pageable pageable);
+
 }
